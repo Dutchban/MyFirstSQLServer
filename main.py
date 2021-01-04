@@ -21,13 +21,14 @@ while 1:
                        "'search_contact' to search for a specific contact\n"
                        "'update_contact' to update a specific contact\n")
     if user_input == "show_contacts":
-        query = "SELECT FirstName FROM TestDB.dbo.Person"
+        query = "SELECT FirstName, LastName, Age FROM TestDB.dbo.Person"
         with pyodbc.connect(conx_string) as conx:
             cursor = conx.cursor()
             cursor.execute(query)
             data = cursor.fetchall()
         print("There you go:\n")
-        print(data)
+        for row in data:
+            print(f"FIRST NAME: {row.FirstName} LAST NAME: {row.LastName} AGE: {row.Age}")
     else:
         print("hello")
 
