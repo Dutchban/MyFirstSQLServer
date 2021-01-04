@@ -4,14 +4,14 @@ pyodbc.drivers()
 
 conx_string = "Driver={SQL Server}; Server=DESKTOP-0B1B77F; Database=TestDB; Trusted_Connection=yes;"
 
-query = "SELECT FirstName, LastName FROM TestDB.dbo.Person"
+query = "SELECT FirstName, LastName, AGE FROM TestDB.dbo.Person"
 
 with pyodbc.connect(conx_string) as conx:
     cursor = conx.cursor()
     cursor.execute(query)
     data = cursor.fetchall()
 
-print(data[:5])
+print(data)
 
 print("Your adress book is now ready to start.")
 
@@ -29,6 +29,16 @@ while 1:
         print("There you go:\n")
         for row in data:
             print(f"FIRST NAME: {row.FirstName} LAST NAME: {row.LastName} AGE: {row.Age}")
+    if user_input == "search_contact":
+        searched_name = input("What person do you search?\n")
+        query = "SELECT FirstName FROM TestDB.dbo.Person WHERE FirstName = '%Martin%'"
+        with pyodbc.connect(conx_string) as conx:
+            cursor = conx.cursor()
+            cursor.execute(query)
+            data = cursor.fetchall()
+        print("There you go:\n")
+        for row in data:
+            print(f"FIRST NAME: {row.FirstName}")
     else:
         print("hello")
 
