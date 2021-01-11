@@ -1,1 +1,1 @@
-This is basically a testrun for my upcoming small project, an adress book. I needed to figure out how to use a SQL Server in PyCharm
+This is another very small project, an adress book. In this mini project i learned how to user an SQL Server in my Python project.
